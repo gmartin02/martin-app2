@@ -1,0 +1,8 @@
+
+;
+java:S1172"&Remove these unused method parameters.(¹›Å
+M
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8þý¾ŽÑ/
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8þý¾ŽÑ/
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ˆµ‚õ
