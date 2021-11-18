@@ -8,6 +8,10 @@ public class Inventory {
 
     public void addItem(String name, String id, double value) {
         //creates a new item with the parameters as its attributes
+        Item newItem = new Item();
+        newItem.name = name;
+        newItem.serialNumber = id;
+        newItem.value = value;
         //appends this item to the end of the list
     }
 

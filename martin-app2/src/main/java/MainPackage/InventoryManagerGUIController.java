@@ -95,6 +95,8 @@ public class InventoryManagerGUIController implements Initializable {
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
         serialNumberColumn.setCellValueFactory(new PropertyValueFactory<>("serialNumber"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        tableView.setItems(obsInventory);
     }
 
     //loads the table with new todolist manager when called

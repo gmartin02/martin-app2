@@ -29,7 +29,7 @@
             <Insets left="50.0" />
          </VBox.margin>
       </HBox>
-      <TableView maxWidth="-Infinity" prefHeight="450.0" prefWidth="900.0" translateX="50.0" translateY="20.0">
+      <TableView fx:id="tableView" maxWidth="-Infinity" prefHeight="450.0" prefWidth="900.0" translateX="50.0" translateY="20.0">
         <columns>
           <TableColumn fx:id="valueColumn" prefWidth="100.0" text="Value ($)" />
           <TableColumn fx:id="serialNumberColumn" prefWidth="300.0" text="Serial Number" />
