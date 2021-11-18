@@ -1,5 +1,9 @@
 package MainPackage;
 
+import com.google.gson.Gson;
+
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,15 +32,22 @@ public class InventoryManager {
 
     }
 
-    public void loadFromJSONFile() {
+    public void loadFromJSONFile(File selectedFile) {
         //empty the inventory first
+        inventory.removeAllItems();
         //in a try block
+        try {
             //create gson object
+            Gson gson = new Gson();
             //assign inventory to hold the gson parsed data
+            inventory = gson.fromJson(new FileReader(selectedFile.getPath()), Inventory.class);
         //catch any exceptions
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void loadFromHTMLFile() {
+    public void loadFromHTMLFile(File selectedFile) {
         //empty the inventory first
         //skip through all the tags in the file to get to each item
         //create a new temporary Item object and assign it those values
@@ -44,7 +55,7 @@ public class InventoryManager {
 
     }
 
-    public void loadFromTSVFile() {
+    public void loadFromTSVFile(File selectedFile) {
         //empty the inventory first
         //while the next line is not empty
         //create a new temporary Item object and assign it those values

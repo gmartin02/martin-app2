@@ -2,7 +2,7 @@ package MainPackage;
 
 public class Item {
     String name;
-    String id;
+    String serialNumber;
     double value;
 
     public String getName() {
@@ -10,9 +10,9 @@ public class Item {
         return name;
     }
 
-    public String getId() {
+    public String getSerialNumber() {
         //gets the id of the current item
-        return id;
+        return serialNumber;
     }
 
     public double getValue() {

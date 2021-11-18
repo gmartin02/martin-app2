@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Inventory {
+    List<Item> itemList = new ArrayList<>();
+
     public void addItem(String name, String id, double value) {
         //creates a new item with the parameters as its attributes
         //appends this item to the end of the list
@@ -16,6 +18,7 @@ public class Inventory {
     public void removeAllItems() {
         //creates an empty inventory list
         //sets the current inventory list to the empty one
+        itemList = new ArrayList<>();
     }
 
     public Item editItem(String newName, String newID, double newValue) {

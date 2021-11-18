@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainPackage.InventoryManagerGUIController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" prefWidth="1000.0" text="Inventory Manager">
          <font>
@@ -32,9 +31,9 @@
       </HBox>
       <TableView maxWidth="-Infinity" prefHeight="450.0" prefWidth="900.0" translateX="50.0" translateY="20.0">
         <columns>
-          <TableColumn prefWidth="100.0" text="Value ($)" />
-          <TableColumn prefWidth="300.0" text="Serial Number" />
-            <TableColumn prefWidth="500.0" text="Name" />
+          <TableColumn fx:id="valueColumn" prefWidth="100.0" text="Value ($)" />
+          <TableColumn fx:id="serialNumberColumn" prefWidth="300.0" text="Serial Number" />
+            <TableColumn fx:id="nameColumn" prefWidth="500.0" text="Name" />
         </columns>
       </TableView>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="150.0" translateY="50.0">
@@ -55,7 +54,7 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" text="Load">
+            <Button mnemonicParsing="false" onMouseClicked="#loadInventoryOnButtonPress" text="Load">
                <font>
                   <Font size="24.0" />
                </font>
@@ -65,5 +64,10 @@
             <Insets left="300.0" />
          </VBox.margin>
       </HBox>
+      <Label fx:id="error" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" prefWidth="1000.0" textFill="RED" translateY="10.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </VBox>
