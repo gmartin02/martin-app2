@@ -38,18 +38,43 @@
       </TableView>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="150.0" translateY="50.0">
          <children>
-            <Button mnemonicParsing="false" text="Add Item" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Remove Item" />
-            <Button layoutX="62.0" layoutY="10.0" mnemonicParsing="false" text="Remove All Items" />
-            <Button mnemonicParsing="false" text="Edit Item" />
+            <Button mnemonicParsing="false" onMouseClicked="#addItemOnButtonPress" text="Add Item" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#removeItemOnButtonPress" text="Remove Item" />
+            <Button layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#removeAllItemsOnButtonPress" text="Remove All Items" />
+            <Button mnemonicParsing="false" onMouseClicked="#editItemOnButtonPress" text="Edit Item" />
          </children>
          <VBox.margin>
             <Insets left="100.0" />
          </VBox.margin>
       </HBox>
+      <HBox prefHeight="25.0" prefWidth="200.0" spacing="20.0">
+         <children>
+            <Label text="Item Value: ">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField />
+            <Label text="Item Serial Number">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField layoutX="10.0" layoutY="10.0" />
+            <Label text="Item Name:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField layoutX="10.0" layoutY="10.0" />
+         </children>
+         <VBox.margin>
+            <Insets left="50.0" />
+         </VBox.margin>
+      </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="200.0" translateY="50.0">
          <children>
-            <Button mnemonicParsing="false" text="Save">
+            <Button mnemonicParsing="false" onMouseClicked="#saveInventoryOnButtonPress" text="Save">
                <font>
                   <Font size="24.0" />
                </font>
@@ -64,7 +89,12 @@
             <Insets left="300.0" />
          </VBox.margin>
       </HBox>
-      <Label fx:id="error" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" prefWidth="1000.0" textFill="RED" translateY="10.0">
+      <Label fx:id="fileError" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" prefWidth="1000.0" textFill="RED" translateY="15.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="itemError" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="756.0" maxWidth="-Infinity" prefWidth="1000.0" textFill="RED" translateY="-110.0">
          <font>
             <Font size="18.0" />
          </font>

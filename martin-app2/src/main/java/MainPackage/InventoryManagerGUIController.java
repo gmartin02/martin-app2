@@ -29,7 +29,7 @@ public class InventoryManagerGUIController implements Initializable {
     @FXML
     private TableColumn<Item, String> nameColumn;
     @FXML
-    private Label error;
+    private Label fileError;
 
     public void addItemOnButtonPress() {
         //ensure name is between [2, 256] characters
@@ -80,7 +80,7 @@ public class InventoryManagerGUIController implements Initializable {
             loadTable(inventoryManager);
         } else {
             //if the chosen file is not one of the 3 acceptable types an error message is given
-            error.setText("File chosen is invalid.");
+            fileError.setText("File chosen is invalid.");
         }
     }
 
