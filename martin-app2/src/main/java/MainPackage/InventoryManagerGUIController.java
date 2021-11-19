@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -30,14 +31,46 @@ public class InventoryManagerGUIController implements Initializable {
     private TableColumn<Item, String> nameColumn;
     @FXML
     private Label fileError;
+    @FXML
+    private Label itemError;
+    @FXML
+    private TextField valueField;
+    @FXML
+    private TextField serialNumberField;
+    @FXML
+    private TextField nameField;
 
     public void addItemOnButtonPress() {
+        int errorFlag = 0;
+        Item newItem = new Item();
         //ensure name is between [2, 256] characters
+        if(nameField.getText().length() >= 2 && nameField.getText().length() <= 256) {
+            newItem.name = nameField.getText();
+        } else {
+            errorFlag = 1;
+        }
         //ensure value >= 0
+        if(Double.parseDouble(valueField.getText()) >= 0) {
+            newItem.value = Double.parseDouble(valueField.getText());
+        } else {
+            errorFlag = 1;
+        }
         //ensure the serial number is unique
+        if(newItem.checkSerialNumberFormat(serialNumberField.getText())) {
+            newItem.serialNumber = serialNumberField.getText();
+        } else {
+            errorFlag = 1;
+        }
+
+        if(errorFlag == 0) {
             //call the addItem method
-        //display an error message if any requirement is not met
+            inventoryManager.inventory.itemList.add(newItem);
+        } else {
+            //display an error message if any requirement is not met
+            itemError.setText("Please enter a valid data.");
+        }
         //load the table to display the updated inventory
+        loadTable(inventoryManager);
 
     }
 
