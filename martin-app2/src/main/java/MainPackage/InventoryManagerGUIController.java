@@ -72,6 +72,10 @@ public class InventoryManagerGUIController implements Initializable {
         //load the table to display the updated inventory
         loadTable(inventoryManager);
 
+        //clear the text fields
+        nameField.setText("");
+        valueField.setText("");
+        serialNumberField.setText("");
     }
 
     public void removeItemOnButtonPress() {

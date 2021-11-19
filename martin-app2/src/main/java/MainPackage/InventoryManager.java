@@ -3,9 +3,11 @@ package MainPackage;
 import com.google.gson.Gson;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class InventoryManager {
     Inventory inventory = new Inventory();
@@ -49,10 +51,41 @@ public class InventoryManager {
 
     public void loadFromHTMLFile(File selectedFile) {
         //empty the inventory first
+        inventory.removeAllItems();
         //skip through all the tags in the file to get to each item
         //create a new temporary Item object and assign it those values
         //add the items to the empty inventory
+        List<String> htmlInput = new ArrayList<>();
+        List<String> validInput = new ArrayList<>();
+        try {
+            try (Scanner sc = new Scanner(selectedFile)) {
+                while (sc.hasNext()) {
+                    htmlInput.add(sc.nextLine());
+                }
+            }
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
+        for(int i = 0; i < htmlInput.size(); i++) {
+            if(!htmlInput.get(i).contains("<")) {
+                validInput.add(htmlInput.get(i));
+            }
+        }
+        validInput.remove(0);
+        validInput.remove(0);
+        validInput.remove(0);
+
+        System.out.println(validInput);
+
+        for(int j = 0; j < validInput.size(); j+=3) {
+            Item item = new Item();
+            item.value = Double.parseDouble(validInput.get(j));
+            item.serialNumber = validInput.get(j+1);
+            item.name = validInput.get(j+2);
+            inventory.itemList.add(item);
+        }
     }
 
     public void loadFromTSVFile(File selectedFile) {
