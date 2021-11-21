@@ -55,19 +55,25 @@ public class InventoryManagerGUIController implements Initializable {
         } else {
             errorFlag = 1;
         }
-        //ensure the serial number is unique
+        //ensure the serial number is in the correct format
         if(newItem.checkSerialNumberFormat(serialNumberField.getText())) {
             newItem.serialNumber = serialNumberField.getText();
         } else {
             errorFlag = 1;
         }
 
+        if(!inventoryManager.inventory.checkUniqueSerialNumbers(newItem)) {
+            errorFlag = 2;
+        }
+
         if(errorFlag == 0) {
             //call the addItem method
             inventoryManager.inventory.itemList.add(newItem);
-        } else {
+        } else if(errorFlag == 1){
             //display an error message if any requirement is not met
-            itemError.setText("Please enter a valid data.");
+            itemError.setText("Please enter valid data.");
+        } else {
+            itemError.setText("Please enter a unique serial number.");
         }
         //load the table to display the updated inventory
         loadTable(inventoryManager);
@@ -79,14 +85,24 @@ public class InventoryManagerGUIController implements Initializable {
     }
 
     public void removeItemOnButtonPress() {
+        Item selectedItem = tableView.getSelectionModel().getSelectedItem();
         //remove the selected item in the table from the display
-        //call the removeItem method to get rid of it from the code
-        //load the table to display the updated inventory
+        if(inventoryManager.inventory.itemList.contains(selectedItem)) {
+            //call the remove method to get rid of it from the code
+            obsInventory.remove(selectedItem);
+            inventoryManager.inventory.itemList.remove(selectedItem);
+            //load the table to display the updated inventory
+            loadTable(inventoryManager);
+        }
     }
 
     public void removeAllItemsOnButtonPress() {
         //clear the entire table
+        tableView.getItems().removeAll(obsInventory);
         //call the removeAllItems method
+        inventoryManager.inventory.removeAllItems();
+        obsInventory.removeAll();
+        loadTable(inventoryManager);
     }
 
     public void editItemOnButtonPress() {
