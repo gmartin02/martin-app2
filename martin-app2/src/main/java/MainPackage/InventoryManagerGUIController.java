@@ -123,8 +123,19 @@ public class InventoryManagerGUIController implements Initializable {
 
     public void saveInventoryOnButtonPress() {
         //creates a file chooser when the button is pressed
+        FileChooser fileChooser = new FileChooser();
+        File file =  fileChooser.showSaveDialog(null);
         //the user can then select a location and choose a name for the file followed by a proper extension
+        FileChooser.ExtensionFilter fileExtensions = new FileChooser.ExtensionFilter("Allowed Types", "*.txt", "*.txt");
+        fileChooser.getExtensionFilters().addAll(fileExtensions);
         //if the chosen file is not one of the 3 acceptable types an error message is given
+        if(file.getName().contains(".txt")) {
+            inventoryManager.writeToTSVFile(file);
+        } else if(file.getName().contains(".html")) {
+            inventoryManager.writeToHTMLFile(file);
+        } else if(file.getName().contains(".json")) {
+            inventoryManager.writeToJSONFile(file);
+        }
             //current list remains displayed
     }
 
