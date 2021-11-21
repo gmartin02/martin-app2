@@ -68,7 +68,7 @@ public class InventoryManagerGUIController implements Initializable {
         }
         //ensure value >= 0
         if(Double.parseDouble(valueField.getText()) >= 0) {
-            newItem.value = valueField.getText();
+            newItem.value = (valueField.getText());
         } else {
             errorFlag = 1;
         }
@@ -189,7 +189,7 @@ public class InventoryManagerGUIController implements Initializable {
         //ensure the new name hsa the proper length
         if(Double.parseDouble(newValue) >= 0) {
             //set the item to have the new name
-            selectedItem.value = newValue;
+            selectedItem.value = (newValue);
         }
         //add it back into the inventory
         inventoryManager.inventory.itemList.add(selectedItem);

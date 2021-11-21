@@ -5,6 +5,18 @@ public class Item {
     String serialNumber;
     String value;
 
+    public String getValue() {
+        return value;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
     public boolean checkSerialNumberFormat(String sn) {
         //ensures the string has a length of 13
         if(sn.length() != 13) {

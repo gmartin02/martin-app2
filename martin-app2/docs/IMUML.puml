@@ -1,0 +1,69 @@
+@startuml
+class Inventory {
+    List<Item> itemList = new ArrayList<>()
+
+    +void removeAllItems()
+    +Item editItem(String newName, String newID, String newValue)
+    +boolean checkUniqueSerialNumbers(Item newItem)
+}
+class Item {
+    String name
+    String serialNumber
+    String value
+
+    +String getValue()
+    +String getName()
+    +String getSerialNumber()
+    +boolean checkSerialNumberFormat(String sn)
+}
+class InventoryManager {
+    Inventory inventory = new Inventory()
+
+    +writeToJSONFile(File file)
+    +writeToHTMLFile(File file)
+    +writeToTSVFile(File file)
+    +loadFromJSONFile(File selectedFile)
+    +loadFromHTMLFile(File selectedFile)
+    +loadFromTSVFile(File selectedFile)
+}
+class InventoryManagerGUIController {
+    ObservableList<Item> obsInventory = FXCollections.observableArrayList()
+    InventoryManager inventoryManager = new InventoryManager()
+
+
+    +TableView<Item> tableView
+    -TableColumn<Item, String> valueColumn
+    -TableColumn<Item, String> serialNumberColumn
+    -TableColumn<Item, String> nameColumn
+    -Label fileError
+    -Label itemError
+    -TextField valueField
+    -TextField serialNumberField
+    -TextField nameField
+    -TextField searchField
+
+    +searchForItemOnButtonPress()
+    +addItemOnButtonPress()
+    +removeItemOnButtonPress()
+    +removeAllItemsOnButtonPress()
+    +checkForEditedSerialNumber(TableColumn.CellEditEvent<String, String> cell)
+    +checkForEditedName(TableColumn.CellEditEvent<String, String> cell)
+    +checkForEditedValue(TableColumn.CellEditEvent<String, String> cell)
+    +loadInventoryOnButtonPress()
+    +saveInventoryOnButtonPress()
+    +initialize(URL location, ResourceBundle resources)
+    +loadTable(InventoryManager im)
+
+}
+class InventoryManagementApplication {
+    +start(Stage stage)
+    +main()
+}
+
+InventoryManagementApplication o-- InventoryManagerGUIController
+InventoryManagerGUIController o-- InventoryManager
+'An inventory manager has an inventory
+InventoryManager *-- Inventory
+'An inventory has a list of Items
+Inventory *-- Item
+@enduml
