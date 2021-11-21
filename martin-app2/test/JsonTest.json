@@ -1,0 +1,8 @@
+{
+    "itemList" : [
+        {"name": "Widget", "value": 25.00, "serialNumber": "A-123-456-789" },
+        {"name": "Thing", "value": 15.00, "serialNumber": "A-1B2-C3D-4E5" },
+        {"name": "Doodad", "value": 5.00, "serialNumber": "A-ABC-DEF-GHI" }
+    ]
+}
+
