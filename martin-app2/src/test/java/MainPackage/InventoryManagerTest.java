@@ -1,3 +1,7 @@
+/*
+ *  UCF COP3330 Fall 2021 Application Assignment 2 Solution
+ *  Copyright 2021 Gabriel Martin
+ */
 package MainPackage;
 
 import org.junit.jupiter.api.Test;
@@ -17,7 +21,7 @@ class InventoryManagerTest {
         newItem.serialNumber = "A-123-456-789";
 
         im.inventory.itemList.add(newItem);
-        File file = new File("test/JSONwrite.json");
+        File file = new File("docs/test/JSONwrite.json");
         im.writeToJSONFile(file);
 
         assertTrue(file.exists());
@@ -32,7 +36,7 @@ class InventoryManagerTest {
         newItem.serialNumber = "A-123-456-789";
 
         im.inventory.itemList.add(newItem);
-        File file = new File("test/HTMLwrite.html");
+        File file = new File("docs/test/HTMLwrite.html");
         im.writeToHTMLFile(file);
 
         assertTrue(file.exists());
@@ -47,7 +51,7 @@ class InventoryManagerTest {
         newItem.serialNumber = "A-123-456-789";
 
         im.inventory.itemList.add(newItem);
-        File file = new File("test/TSVwrite.txt");
+        File file = new File("docs/test/TSVwrite.txt");
         im.writeToTSVFile(file);
 
         assertTrue(file.exists());
@@ -56,7 +60,7 @@ class InventoryManagerTest {
     @Test
     void loadFromJSONFile() {
         InventoryManager im = new InventoryManager();
-        File file = new File("test/JSONtest.json");
+        File file = new File("docs/test/JSONtest.json");
         im.loadFromJSONFile(file);
 
         assertEquals("Widget", im.inventory.itemList.get(0).name);
@@ -65,7 +69,7 @@ class InventoryManagerTest {
     @Test
     void loadFromHTMLFile() {
         InventoryManager im = new InventoryManager();
-        File file = new File("test/InventoryTest.html");
+        File file = new File("docs/test/InventoryTest.html");
         im.loadFromHTMLFile(file);
 
         assertEquals("apple", im.inventory.itemList.get(0).name);
@@ -74,7 +78,7 @@ class InventoryManagerTest {
     @Test
     void loadFromTSVFile() {
         InventoryManager im = new InventoryManager();
-        File file = new File("test/TSVtest.txt");
+        File file = new File("docs/test/TSVtest.txt");
         im.loadFromTSVFile(file);
 
         assertEquals("Widget", im.inventory.itemList.get(0).name);

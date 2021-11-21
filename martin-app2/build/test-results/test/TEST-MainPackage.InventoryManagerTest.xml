@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainPackage.InventoryManagerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-11-21T08:21:57" hostname="DESKTOP-03MLBTC" time="0.061">
+<testsuite name="MainPackage.InventoryManagerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-11-21T08:34:06" hostname="DESKTOP-03MLBTC" time="0.062">
   <properties/>
   <testcase name="writeToJSONFile()" classname="MainPackage.InventoryManagerTest" time="0.046"/>
   <testcase name="writeToTSVFile()" classname="MainPackage.InventoryManagerTest" time="0.001"/>

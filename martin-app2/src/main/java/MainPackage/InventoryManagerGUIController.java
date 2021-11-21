@@ -1,3 +1,7 @@
+/*
+ *  UCF COP3330 Fall 2021 Application Assignment 2 Solution
+ *  Copyright 2021 Gabriel Martin
+ */
 package MainPackage;
 
 import javafx.collections.FXCollections;
@@ -67,7 +71,7 @@ public class InventoryManagerGUIController implements Initializable {
             errorFlag = 1;
         }
         //ensure value >= 0
-        if(Double.parseDouble(valueField.getText()) >= 0) {
+        if(Double.parseDouble(valueField.getText()) >= 0 && valueField.getText().contains(".00")) {
             newItem.value = (valueField.getText());
         } else {
             errorFlag = 1;
