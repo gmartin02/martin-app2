@@ -9,8 +9,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
@@ -24,7 +24,7 @@ public class InventoryManagerGUIController implements Initializable {
     @FXML
     public TableView<Item> tableView;
     @FXML
-    private TableColumn<Item, Double> valueColumn;
+    private TableColumn<Item, String> valueColumn;
     @FXML
     private TableColumn<Item, String> serialNumberColumn;
     @FXML
@@ -51,7 +51,7 @@ public class InventoryManagerGUIController implements Initializable {
         }
         //ensure value >= 0
         if(Double.parseDouble(valueField.getText()) >= 0) {
-            newItem.value = Double.parseDouble(valueField.getText());
+            newItem.value = valueField.getText();
         } else {
             errorFlag = 1;
         }
@@ -61,7 +61,7 @@ public class InventoryManagerGUIController implements Initializable {
         } else {
             errorFlag = 1;
         }
-
+        //ensure the serial number is unique
         if(!inventoryManager.inventory.checkUniqueSerialNumbers(newItem)) {
             errorFlag = 2;
         }
@@ -105,14 +105,81 @@ public class InventoryManagerGUIController implements Initializable {
         loadTable(inventoryManager);
     }
 
-    public void editItemOnButtonPress() {
-        //displays the selected items values
-        //get the index of the displayed item in the inventory
-        //ensure name is between [2, 256] characters
-        //ensure value >= 0
-        //ensure the serial number is unique
-            //call the editItem method with the currentItem passed as a parameter
-        //load the table to display the updated inventory
+    public void checkForEditedSerialNumber(TableColumn.CellEditEvent<String, String> cell) {
+        //get the item that you want to edit
+        Item selectedItem = tableView.getSelectionModel().getSelectedItem();
+        //remove the selected item from the inventory temporarily
+        inventoryManager.inventory.itemList.remove(selectedItem);
+        obsInventory.remove(selectedItem);
+        //get the new value of the edited item
+        String newSerialNumber = cell.getNewValue();
+        //ensure the new number has the right format
+        if(selectedItem.checkSerialNumberFormat(newSerialNumber)) {
+            //save the old sn
+            String oldSerialNumber = selectedItem.serialNumber;
+            selectedItem.serialNumber = newSerialNumber;
+            //ensure new sn is unique
+            if(inventoryManager.inventory.checkUniqueSerialNumbers(selectedItem)) {
+                //put it into the itemList
+                Item editedItem = inventoryManager.inventory.editItem(selectedItem.name, selectedItem.serialNumber, selectedItem.value);
+                inventoryManager.inventory.itemList.add(editedItem);
+                obsInventory.add(editedItem);
+            } else {
+                //return to original state
+                selectedItem.serialNumber = oldSerialNumber;
+                inventoryManager.inventory.itemList.add(selectedItem);
+                obsInventory.add(selectedItem);
+            }
+        } else {
+            //return to original state
+            inventoryManager.inventory.itemList.add(selectedItem);
+            obsInventory.add(selectedItem);
+        }
+
+        //reload the table
+        loadTable(inventoryManager);
+    }
+
+    public void checkForEditedName(TableColumn.CellEditEvent<String, String> cell) {
+        //get the item that you want to edit
+        Item selectedItem = tableView.getSelectionModel().getSelectedItem();
+        //remove the selected item from the inventory temporarily
+        inventoryManager.inventory.itemList.remove(selectedItem);
+        obsInventory.remove(selectedItem);
+        //get the new value of the edited item
+        String newName = cell.getNewValue();
+        //ensure the new name hsa the proper length
+        if(newName.length() >= 2 && newName.length() <= 256) {
+            //set the item to have the new name
+            selectedItem.name = newName;
+        }
+        //add it back into the inventory
+        inventoryManager.inventory.itemList.add(selectedItem);
+        obsInventory.add(selectedItem);
+
+        //reload the table
+        loadTable(inventoryManager);
+    }
+
+    public void checkForEditedValue(TableColumn.CellEditEvent<String, String> cell) {
+        //get the item that you want to edit
+        Item selectedItem = tableView.getSelectionModel().getSelectedItem();
+        //remove the selected item from the inventory temporarily
+        inventoryManager.inventory.itemList.remove(selectedItem);
+        obsInventory.remove(selectedItem);
+        //get the new value of the edited item
+        String newValue = cell.getNewValue();
+        //ensure the new name hsa the proper length
+        if(Double.parseDouble(newValue) >= 0) {
+            //set the item to have the new name
+            selectedItem.value = newValue;
+        }
+        //add it back into the inventory
+        inventoryManager.inventory.itemList.add(selectedItem);
+        obsInventory.add(selectedItem);
+
+        //reload the table
+        loadTable(inventoryManager);
     }
 
     public void loadInventoryOnButtonPress() {
@@ -161,6 +228,11 @@ public class InventoryManagerGUIController implements Initializable {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         tableView.setItems(obsInventory);
+
+        tableView.setEditable(true);
+        nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        valueColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        serialNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
     }
 
     //loads the table with new todolist manager when called

@@ -13,11 +13,15 @@ public class Inventory {
         itemList = new ArrayList<>();
     }
 
-    public Item editItem(String newName, String newID, double newValue) {
+    public Item editItem(String newName, String newID, String newValue) {
         //takes in the new values for the current item
+        Item editedItem = new Item();
         //sets each of the items values to the appropriate attributes
+        editedItem.name = newName;
+        editedItem.serialNumber = newID;
+        editedItem.value = newValue;
         //returns the new Item
-        return null;
+        return editedItem;
     }
 
     public boolean checkUniqueSerialNumbers(Item newItem) {

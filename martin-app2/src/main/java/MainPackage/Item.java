@@ -3,7 +3,7 @@ package MainPackage;
 public class Item {
     String name;
     String serialNumber;
-    double value;
+    String value;
 
     public String getName() {
         //gets the name of the current item
@@ -15,7 +15,7 @@ public class Item {
         return serialNumber;
     }
 
-    public double getValue() {
+    public String getValue() {
         //gets the value of the current item
         return value;
     }

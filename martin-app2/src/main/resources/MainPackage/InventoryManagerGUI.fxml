@@ -31,20 +31,19 @@
       </HBox>
       <TableView fx:id="tableView" maxWidth="-Infinity" prefHeight="450.0" prefWidth="900.0" translateX="50.0" translateY="20.0">
         <columns>
-          <TableColumn fx:id="valueColumn" prefWidth="100.0" text="Value ($)" />
-          <TableColumn fx:id="serialNumberColumn" prefWidth="300.0" text="Serial Number" />
-            <TableColumn fx:id="nameColumn" prefWidth="500.0" text="Name" />
+          <TableColumn fx:id="valueColumn" onEditCommit="#checkForEditedValue" prefWidth="100.0" text="Value ($)" />
+          <TableColumn fx:id="serialNumberColumn" onEditCommit="#checkForEditedSerialNumber" prefWidth="300.0" text="Serial Number" />
+            <TableColumn fx:id="nameColumn" onEditCommit="#checkForEditedName" prefWidth="500.0" text="Name" />
         </columns>
       </TableView>
-      <HBox prefHeight="100.0" prefWidth="200.0" spacing="150.0" translateY="50.0">
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="200.0" translateY="50.0">
          <children>
             <Button mnemonicParsing="false" onMouseClicked="#addItemOnButtonPress" text="Add Item" />
             <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#removeItemOnButtonPress" text="Remove Item" />
             <Button layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#removeAllItemsOnButtonPress" text="Remove All Items" />
-            <Button mnemonicParsing="false" onMouseClicked="#editItemOnButtonPress" text="Edit Item" />
          </children>
          <VBox.margin>
-            <Insets left="100.0" />
+            <Insets left="180.0" />
          </VBox.margin>
       </HBox>
       <HBox prefHeight="25.0" prefWidth="200.0" spacing="20.0">

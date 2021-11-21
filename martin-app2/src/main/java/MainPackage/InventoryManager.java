@@ -129,7 +129,7 @@ public class InventoryManager {
         for(int j = 0; j < validInput.size(); j+=3) {
             //create a new temporary Item object and assign it those values
             Item item = new Item();
-            item.value = Double.parseDouble(validInput.get(j));
+            item.value = validInput.get(j);
             item.serialNumber = validInput.get(j+1);
             item.name = validInput.get(j+2);
             //add the items to the empty inventory
@@ -148,7 +148,7 @@ public class InventoryManager {
                     String currentItem = sc.nextLine();
                     String[] itemValues = currentItem.split("\t");
                     Item item = new Item();
-                    item.value = Double.parseDouble(itemValues[2]);
+                    item.value = itemValues[2];
                     item.serialNumber = itemValues[0];
                     item.name = itemValues[1];
                     //add the items to the empty inventory
