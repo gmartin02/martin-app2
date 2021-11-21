@@ -89,6 +89,7 @@ public class InventoryManagerGUIController implements Initializable {
 
         if(errorFlag == 0) {
             //call the addItem method
+            itemError.setText("");
             inventoryManager.inventory.itemList.add(newItem);
         } else if(errorFlag == 1){
             //display an error message if any requirement is not met
