@@ -19,8 +19,8 @@
       </Label>
       <HBox prefHeight="20.0" prefWidth="200.0">
          <children>
-            <TextField />
-            <Button mnemonicParsing="false" text="Search" />
+            <TextField fx:id="searchField" />
+            <Button mnemonicParsing="false" onMouseClicked="#searchForItemOnButtonPress" text="Search" />
          </children>
          <opaqueInsets>
             <Insets />

@@ -5,21 +5,6 @@ public class Item {
     String serialNumber;
     String value;
 
-    public String getName() {
-        //gets the name of the current item
-        return name;
-    }
-
-    public String getSerialNumber() {
-        //gets the id of the current item
-        return serialNumber;
-    }
-
-    public String getValue() {
-        //gets the value of the current item
-        return value;
-    }
-
     public boolean checkSerialNumberFormat(String sn) {
         //ensures the string has a length of 13
         if(sn.length() != 13) {

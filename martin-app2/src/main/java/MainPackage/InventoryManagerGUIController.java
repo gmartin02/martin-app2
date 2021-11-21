@@ -39,7 +39,24 @@ public class InventoryManagerGUIController implements Initializable {
     private TextField serialNumberField;
     @FXML
     private TextField nameField;
+    @FXML
+    private TextField searchField;
 
+    public void searchForItemOnButtonPress() {
+        if(searchField.getText().equals("")){
+            loadTable(inventoryManager);
+        }
+        else {
+            for (int i = 0; i < inventoryManager.inventory.itemList.size(); i++) {
+                if (searchField.getText().equals(inventoryManager.inventory.itemList.get(i).serialNumber) || searchField.getText().equals(inventoryManager.inventory.itemList.get(i).name)) {
+                    tableView.getItems().clear();
+                    ObservableList<Item> searchResult = FXCollections.observableArrayList();
+                    searchResult.add(inventoryManager.inventory.itemList.get(i));
+                    tableView.setItems(searchResult);
+                }
+            }
+        }
+    }
     public void addItemOnButtonPress() {
         int errorFlag = 0;
         Item newItem = new Item();
@@ -191,12 +208,15 @@ public class InventoryManagerGUIController implements Initializable {
         //the current inventory is replaced by the new one both visually and in the code
         if(selectedFile != null && selectedFile.getName().contains(".json")) {
             inventoryManager.loadFromJSONFile(selectedFile);
+            obsInventory.addAll(inventoryManager.inventory.itemList);
             loadTable(inventoryManager);
         } else if(selectedFile != null && selectedFile.getName().contains(".html")) {
             inventoryManager.loadFromHTMLFile(selectedFile);
+            obsInventory.addAll(inventoryManager.inventory.itemList);
             loadTable(inventoryManager);
         } else if(selectedFile != null && selectedFile.getName().contains(".txt")) {
             inventoryManager.loadFromTSVFile(selectedFile);
+            obsInventory.addAll(inventoryManager.inventory.itemList);
             loadTable(inventoryManager);
         } else {
             //if the chosen file is not one of the 3 acceptable types an error message is given

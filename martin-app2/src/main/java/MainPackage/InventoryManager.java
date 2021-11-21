@@ -124,8 +124,6 @@ public class InventoryManager {
         validInput.remove(0);
         validInput.remove(0);
 
-        System.out.println(validInput);
-
         for(int j = 0; j < validInput.size(); j+=3) {
             //create a new temporary Item object and assign it those values
             Item item = new Item();
